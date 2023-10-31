@@ -7,3 +7,6 @@
 /+= ↯∶@l△. "Hello"
 # Actually, we can just use rank polymorphism.
 /+=@l "Hello"
+# Slightly longer way:
+# Filter out the 'l' letters and get length.
+⧻▽=@l. "Hello"
