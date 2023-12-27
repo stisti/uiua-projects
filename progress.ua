@@ -4,7 +4,6 @@
 # Re-open stdout to work around it.
 STDOUT ← &fc "/dev/stdout"
 StartTime ← now
-DisplayWidth = select1&ts
 # When Display is called, stack contains the
 # the total number of bytes read.
 Display ← (
@@ -19,6 +18,11 @@ Display ← (
 DisplayThread ← spawn(⍢(Display +)(>0. recv 0) 0)
 ⍢∘(>0 send: DisplayThread .⧻ &w: STDOUT . &rb 4096 0)
 &cl STDOUT
-wait DisplayThread
+# Discard stack from display thread
+;;wait DisplayThread
+# Sleep to allow any other shell pipeline processes to finish
+# their output
 &sl 1
+# Output one final newline to prevent shell prompt from
+# overwriting our progress display
 &w "\n" 2
