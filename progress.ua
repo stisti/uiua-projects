@@ -4,16 +4,21 @@
 # Re-open stdout to work around it.
 STDOUT ← &fc "/dev/stdout"
 StartTime ← now
+DisplayWidth = select1&ts
+# When Display is called, stack contains the
+# the total number of bytes read.
 Display ← (
   &w "Total: " 2
   &w °⋕, 2
   &w " B | Elapsed: " 2
   &w °⋕⌊- StartTime now 2
   &w " s | Speed: " 2
-  &w :2 °⋕ ⌊÷- StartTime now .
+  &w °⋕ ⌊÷- StartTime now :2.
   &w " B/s       \r" 2
 )
 DisplayThread ← spawn(⍢(Display +)(>0. recv 0) 0)
 ⍢∘(>0 send: DisplayThread .⧻ &w: STDOUT . &rb 4096 0)
 &cl STDOUT
 wait DisplayThread
+&sl 1
+&w "\n" 2
