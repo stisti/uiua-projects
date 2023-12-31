@@ -24,8 +24,10 @@ Display ← (|1.0
   &w :2             # write to stderr
   &w "\r" 2
 )
-DisplayThread ← spawn(⍢(Display .+)(>0. recv 0) 0)
-⍢∘(⊃⊃(>0⧻)(send: DisplayThread ⧻)(&w: STDOUT) &rb 4096 0)
+# Main thread will send array [<read byte count> <total byte count>]
+DisplayThread ← spawn(⍢(Display)(⊃(>0⊏0)(⊏1) recv 0) 0)
+0 # initialize byte count
+⍢∘(⊃⊃⊃(>0⧻)(send: DisplayThread [⊃⧻(+⧻)])(&w: STDOUT)(+⧻) &rb 4096 0)
 &cl STDOUT
 # Discard stack from display thread
 ;;wait DisplayThread
