@@ -25,7 +25,7 @@ Display ← (|1.0
   &w "\r" 2
 )
 DisplayThread ← spawn(⍢(Display .+)(>0. recv 0) 0)
-⍢∘(>0 send: DisplayThread .⧻ &w: STDOUT . &rb 4096 0)
+⍢∘(⊃⊃(>0⧻)(send: DisplayThread ⧻)(&w: STDOUT) &rb 4096 0)
 &cl STDOUT
 # Discard stack from display thread
 ;;wait DisplayThread
