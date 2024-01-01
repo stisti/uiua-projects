@@ -33,6 +33,7 @@ DisplayThread ← spawn(⍢((;:|now Display;) <¯0.1-now .:)(⊃(>0⊏0)(⊏1) r
 ⍢∘(⊃⊃⊃(>0⧻)(send: DisplayThread [⊃⧻(+⧻)])(&w: STDOUT)(+⧻) &rb 4096 0)
 &cl STDOUT
 wait DisplayThread
+;; # discard display thread stack
 # Display might be out of date, so call it one last time
 Display
 # Sleep to allow any other shell pipeline processes to finish
