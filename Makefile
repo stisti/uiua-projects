@@ -1,16 +1,13 @@
-SHELL = /bin/bash
+UIUA = uiua
 
-progress: progress.ua
-	uiua test progress.ua
-	uiua run $< < /bin/bash | cmp /bin/bash
-	uiua stand --name $@ $<
+all: progress
 
-test: test-copy
+%: %.ua
+	$(UIUA) test $<
+	$(UIUA) stand --name $@ $<
 
-test-copy: test-copy-1
-
-test-copy-1: copy.ua
-	uiua run $< < /bin/bash | cmp /bin/bash
+test: progress
+	./$< < /bin/bash | cmp /bin/bash
 
 clean:
 	$(RM) progress
