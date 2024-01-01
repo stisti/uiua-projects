@@ -1,10 +1,11 @@
 SHELL = /bin/bash
 
 progress: progress.ua
+	uiua test progress.ua
+	uiua run $< < /bin/bash | cmp /bin/bash
 	uiua stand --name $@ $<
 
 test: test-copy
-	uiua test progress.ua
 
 test-copy: test-copy-1
 
