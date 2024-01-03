@@ -1,6 +1,6 @@
 # Invert modifier
 √2
-⍘√2
+°√2
 
 # Under modifier
 ⁅π
