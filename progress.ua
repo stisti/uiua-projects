@@ -5,7 +5,7 @@
 STDOUT ← &fc "/dev/stdout"
 TerminalWidth ← |0 ⊏1&ts
 StartTime ← |0 now
-Round ← |1 ÷10⁅×10°□
+Round ← |1 ⍜(×10)⁅°□
 # When Display is called, stack contains the total number of bytes read.
 Display ← (|1.0
   ÷[1 1024 ×.1024]    # multipliers for bytes, kB and MB
