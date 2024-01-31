@@ -11,3 +11,6 @@ test: progress
 
 clean:
 	$(RM) progress
+
+test-copy:
+	$(UIUA) run copy.ua < /bin/bash | cmp /bin/bash
