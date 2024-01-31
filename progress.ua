@@ -20,7 +20,7 @@ Display ← (|1.0
   )
   °□⊢⊏⊚=/↧.≡⧻.      # pick the status line that is shortest
   -:TerminalWidth⧻. # calculate required fill
-  ⊂⬚@ ↙:""          # fill with spaces
+  ⊂↯:@              # fill with spaces
   &w :2             # write to stderr
   &w "\r" 2
 )
@@ -28,12 +28,12 @@ Display ← (|1.0
 # This forces Display on first call.
 # Main thread will send array [<read byte count> <total byte count>]
 # Display thread keeps running as long as <read byte count> >0
-DisplayThread ← spawn(⍢((;:|now Display;) <¯0.1-now .:)(⊃(>0⊏0)(⊏1) recv 0) -2 now)
+DisplayThread ← spawn(⍢((◌:|now Display◌) <¯0.1-now .:)(⊃(>0⊏0)(⊏1) recv 0) -2 now)
 0 # initialize byte count
 ⍢∘(⊃⊃⊃(>0⧻)(send: DisplayThread [⊃⧻(+⧻)])(&w: STDOUT)(+⧻) &rb 4096 0)
 &cl STDOUT
 wait DisplayThread
-;; # discard display thread stack
+◌◌ # discard display thread stack
 # Display might be out of date, so call it one last time
 Display
 # Sleep to allow any other shell pipeline processes to finish
