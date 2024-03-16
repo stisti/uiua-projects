@@ -1,6 +1,8 @@
 UIUA = uiua
+PROGRAMS = progress httpcli
 
-all: progress
+all: $(PROGRAMS)
+	ls -lh $(PROGRAMS)
 
 %: %.ua
 	$(UIUA) test $<
@@ -10,7 +12,7 @@ test: progress
 	./$< < /bin/bash | cmp /bin/bash
 
 clean:
-	$(RM) progress
+	$(RM) $(PROGRAMS)
 
 test-copy:
 	$(UIUA) run copy.ua < /bin/bash | cmp /bin/bash
