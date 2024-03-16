@@ -14,7 +14,6 @@ HttpCli ← (|1.0
   &tcpc $"_:443" HostFromParts.
   PathFromParts:
   &w $"Path=_\n" :2.
-  # drop host from Url and make request
   &httpsw $"GET /_ HTTP/1.0"
   # stack now contains the http reply, both headers and body
   &w ">>> Headers begin\n" 2
