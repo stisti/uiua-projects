@@ -18,7 +18,7 @@ Display ← (|1.0
     ⊃⊃⊃⊃(Round⊏1)(°□⊏3)(Round⊏0)(Round⊏2)(°□⊏3)
     □$"Total: _ _ | Elapsed: _ s | Speed: _ _/s"
   )
-  °□⊢⊏⊚=/↧.≡⧻.      # pick the status line that is shortest
+  °□⊏⊢⊚=/↧.≡⧻.      # pick the status line that is shortest
   -:TerminalWidth⧻. # calculate required fill
   ⊂↯:@              # fill with spaces
   &w :2             # write to stderr
