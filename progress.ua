@@ -30,7 +30,7 @@ Display ← (|1.0
 # Display thread keeps running as long as <read byte count> >0
 DisplayThread ← spawn(⍢((◌:|now Display◌) <¯0.1-now .:)(⊃(>0⊏0)(⊏1) recv 0) -2 now)
 0 # initialize byte count
-⍢∘(⊃⊃⊃(>0⧻)(send: DisplayThread [⊃⧻(+⧻)])(&w: STDOUT)(+⧻) &rb 4096 0)
+⍢∘(⊃⊃⊃(>0⧻)(send DisplayThread [⊃⧻(+⧻)])(&w: STDOUT)(+⧻) &rb 4096 0)
 &cl STDOUT
 wait DisplayThread
 ◌◌ # discard display thread stack
