@@ -16,8 +16,8 @@
 
 	// Features to add to the dev container. More info: https://containers.dev/features.
 	"features": {
-    "ghcr.io/devcontainers/features/nix:1": "1.2.0"
-  },
+    	"ghcr.io/devcontainers/features/nix:1": "2.23.0"
+  	},
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// "forwardPorts": [],
