@@ -9,7 +9,7 @@ all: $(PROGRAMS)
 	$(UIUA) stand --name $@ $<
 
 test: progress
-	./$< < /bin/bash | cmp /bin/bash
+	./test-progress.sh
 
 clean:
 	$(RM) $(PROGRAMS)
