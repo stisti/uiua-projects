@@ -2,10 +2,9 @@
 #
 # Uiua assumes handle 1 is always used with utf-8 encoded strings.
 # Re-open stdout to work around that.
-STDOUT ← 1 # &fc "/dev/stdout"
-TerminalWidth ← |0 ⊏1&ts
-StartTime ← |0 now
-Round ← |1 ⍜(×10)⁅°□
+STDOUT        ← 1 # &fc "/dev/stdout"
+StartTime     ← |0 now
+Round         ← |1 ⍜(×10)⁅°□
 # When Display is called, stack contains the total number of bytes read.
 Display ← (|1.0
   ÷[1 1024 ×.1024]    # multipliers for bytes, kB and MB
@@ -18,17 +17,15 @@ Display ← (|1.0
     ⊃⊃⊃⊃(Round⊏1)(°□⊏3)(Round⊏0)(Round⊏2)(°□⊏3)
     □$"Total: _ _ | Elapsed: _ s | Speed: _ _/s"
   )
-  °□⊏⊢⊚=/↧.≡⧻.      # pick the status line that is shortest
-  -:TerminalWidth⧻. # calculate required fill
-  ⊂↯:@              # fill with spaces
-  &w :2             # write to stderr
-  &w "\r" 2
+  °□⊏⊢⊚=/↧.≡⧻.  # pick the status line that is shortest
+  &w :2           # write to stderr
+  &w "\e[K\r" 2  # erase to end of line, return to line start
 )
 # Display thread starts with stack set to (now - 2) seconds.
 # This forces Display on first call.
 # Main thread will send array [<read byte count> <total byte count>]
 # Display thread keeps running as long as <read byte count> >0
-DisplayThread ← spawn(⍢(⟨◌:|now Display◌⟩ <¯0.1-now .:)(⊃(>0⊏0)(⊏1) recv 0) -2 now)
+DisplayThread ← spawn(⍢(⨬(◌:)(now Display◌) <¯0.1-now .:)(⊃(>0⊏0)(⊏1) recv 0) -2 now)
 0 # initialize byte count
 ⍢∘(⊃⊃⊃(>0⧻)(send DisplayThread [⊃⧻(+⧻)])(&w: STDOUT)(+⧻) &rb 4096 0)
 &cl STDOUT
@@ -43,7 +40,7 @@ Display
 # overwriting our progress display
 &w "\n" 2
 
----
-⍤.=5.3 Round 5.25
-⍤.=5 Round 5
----
+┌─╴test
+  ⍤.=5.3 Round 5.25
+  ⍤.=5 Round 5
+└─╴
